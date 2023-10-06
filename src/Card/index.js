@@ -16,12 +16,7 @@ function Card({ element }) {
       <div
         ref={nodeRef}
         className="card-container"
-        onClick={() =>
-          setShowBack((variable) => {
-            console.log("click");
-            return !variable;
-          })
-        }
+        onClick={() => setShowBack((variable) => !variable)}
       >
         <div className="card-back">{element}</div>
         <div className="card-front">?</div>
