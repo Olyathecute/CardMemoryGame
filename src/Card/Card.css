@@ -3,6 +3,8 @@
   height: 6rem;
   position: relative;
   cursor: pointer;
+  user-select: none;
+  transform-style: preserve-3d;
 }
 
 .card-front,
@@ -15,25 +17,50 @@
   background-color: rgb(255, 255, 255);
   color: black;
 
-  transition: transform 1s;
-  user-select: none;
   backface-visibility: hidden;
 
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 32pt;
-
-  /* text-align: center; */
-  /* line-height: 100px; */
 }
 
-.card-front {
+.card-back {
   transform: rotateY(180deg);
 }
-.card-container.flipped .card-back {
-  transform: rotateY(180deg);
-}
-.card-container.flipped .card-front {
+
+/*
+Enter Transition
+showFront = true -> false
+front -> back
+
+Exit Transition
+showFront = false -> true
+back -> front
+*/
+
+.flip-exit {
   transform: rotateY(0deg);
+}
+
+.flip-exit-active {
+  transform: rotateY(180deg);
+  transition: transform 300ms;
+}
+
+.flip-exit-done {
+  transform: rotateY(0deg);
+}
+
+.flip-enter {
+  transform: rotateY(180deg);
+}
+
+.flip-enter-active {
+  transform: rotateY(0deg);
+  transition: transform 300ms;
+}
+
+.flip-enter-done {
+  transform: rotateY(180deg);
 }

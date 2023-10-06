@@ -9,7 +9,7 @@ function App() {
   const moves = 0;
 
   return (
-    <body>
+    <>
       <header>
         <h1>Card Memory Game</h1>
       </header>
@@ -30,7 +30,7 @@ function App() {
         </div>
         <Board newGame={newGame} />
       </div>
-    </body>
+    </>
   );
 }
 
