@@ -3,26 +3,30 @@ import { CSSTransition } from "react-transition-group";
 import "./Card.css";
 
 function Card({ element }) {
-  const [showBack, setShowBack] = useState(true);
+  const [showBack, setShowBack] = useState(false);
   const nodeRef = useRef(null);
+
   return (
-    <>
-      <CSSTransition
-        in={showBack}
-        timeout={300}
-        classNames="flip"
-        nodeRef={nodeRef}
+    <CSSTransition
+      in={showBack}
+      timeout={300}
+      classNames="flip"
+      nodeRef={nodeRef}
+    >
+      <div
+        ref={nodeRef}
+        className="card-container"
+        onClick={() =>
+          setShowBack((variable) => {
+            console.log("click");
+            return !variable;
+          })
+        }
       >
-        <div
-          ref={nodeRef}
-          className="card-container"
-          onClick={() => setShowBack((variable) => !variable)}
-        >
-          <div className="card-front">?</div>
-          <div className="card-back">{element}</div>
-        </div>
-      </CSSTransition>
-    </>
+        <div className="card-back">{element}</div>
+        <div className="card-front">?</div>
+      </div>
+    </CSSTransition>
   );
 }
 
