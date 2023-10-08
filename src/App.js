@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Board from "./Board";
+import Timer from "./Timer";
 // import { animals, flags, fruits } from "./emojis";
 import "./App.css";
 
 function App() {
   const [newGame, setNewGame] = useState(false);
-  const timer = 0;
+
   const moves = 0;
 
   return (
@@ -24,7 +25,7 @@ function App() {
             </button>
           </div>
           <div className="output-group">
-            <p>Timer: {timer}</p>
+            <Timer newGame={newGame} />
             <p>Moves: {moves}</p>
           </div>
         </div>
