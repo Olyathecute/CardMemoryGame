@@ -1,13 +1,30 @@
 import { useState } from "react";
 import Board from "./Board";
 import Timer from "./Timer";
-// import { animals, flags, fruits } from "./emojis";
+import { animals, flags, fruits } from "./emojis";
 import "./App.css";
+
+const createBoard = (size, elements) => {
+  const fullBoard = elements.slice(0, size === "small" ? 8 : 18);
+  const boardSet = fullBoard.concat(fullBoard);
+  const shuffleBoardSet = boardSet.sort(() => Math.random() - 0.2);
+
+  return shuffleBoardSet;
+};
 
 function App() {
   const [newGame, setNewGame] = useState(false);
+  const [board, setBoard] = useState([]);
+  const [moves, setMoves] = useState(0);
 
-  const moves = 0;
+  const startGame = () => {
+    setNewGame(true);
+    setBoard(createBoard("small", animals));
+  };
+
+  const stopGame = () => {
+    setNewGame(false);
+  };
 
   return (
     <>
@@ -17,10 +34,10 @@ function App() {
       <div className="main">
         <div className="preferences">
           <div className="btn-group">
-            <button className="btn" onClick={() => setNewGame(true)}>
+            <button className="btn" onClick={() => startGame()}>
               Start New Game
             </button>
-            <button className="btn" onClick={() => setNewGame(false)}>
+            <button className="btn" onClick={() => stopGame()}>
               End Game
             </button>
           </div>
@@ -29,7 +46,7 @@ function App() {
             <p>Moves: {moves}</p>
           </div>
         </div>
-        <Board newGame={newGame} />
+        <Board board={board} newGame={newGame} />
       </div>
     </>
   );

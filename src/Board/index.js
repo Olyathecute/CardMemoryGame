@@ -1,25 +1,49 @@
+import { useEffect, useState } from "react";
 import Card from "../Card";
-import { animals } from "../emojis";
 import "./Board.css";
 
 // size: 8 or 18 pictures
 
-const createBoard = (size, elements) => {
-  const fullBoard = elements.slice(0, size === "small" ? 8 : 18);
-  const boardSet = fullBoard.concat(fullBoard);
-  const shuffleBoardSet = boardSet.sort(() => Math.random() - 0.2);
+function Board({ board, newGame }) {
+  const [firstCard, setFirstCard] = useState(null);
+  const [secondCard, setSecondCard] = useState(null);
+  const [disabledCards, setDisabledCards] = useState([]);
 
-  return shuffleBoardSet;
-};
+  useEffect(() => {
+    console.log("firstCard", firstCard);
+    console.log("secondCard", secondCard);
 
-function Board({ size = "small", newGame }) {
-  const board = createBoard(size, animals);
+    if (firstCard && secondCard) {
+      if (firstCard === secondCard) {
+        console.log("match");
+        setDisabledCards([...disabledCards, firstCard]);
+        setFirstCard(null);
+        setSecondCard(null);
+      } else {
+        console.log("not match");
+      }
+    }
+  }, [
+    newGame,
+    firstCard,
+    setFirstCard,
+    secondCard,
+    setSecondCard,
+    disabledCards,
+  ]);
 
   return (
     <div className="container">
       <div className="board">
         {board.map((element, index) => (
-          <Card key={index} element={element} />
+          <Card
+            disabledCards={disabledCards}
+            key={index}
+            element={element}
+            firstCard={firstCard}
+            setFirstCard={setFirstCard}
+            setSecondCard={setSecondCard}
+          />
         ))}
       </div>
     </div>
