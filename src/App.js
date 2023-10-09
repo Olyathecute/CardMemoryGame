@@ -54,15 +54,12 @@ function App() {
 
 export default App;
 
-// - after click user see a board where all cards turn by back-face; timer 00, moves: 00
-// - user choose card (the choosen card turned on front-face)
-// - user choose another card, if both card have identical picture - its stay on front-face and stay unclickable,
-//   in other case - turn in back-face
-// - when all card founded - timer stop, game will ends
-//
-//
+// - разворот карточек при несовпадение
+// - конец игры при открытии всех карточек
+
+// - таймер: сброс секунд после 59
+// - подсчёт количества ходов
+
 // After:
-// - choose the board size
+// - choose the board size (4х4 или 6х6)
 // - choose pictures
-//
-//
