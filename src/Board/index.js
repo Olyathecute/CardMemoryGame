@@ -4,33 +4,27 @@ import "./Board.css";
 
 // size: 8 or 18 pictures
 
-function Board({ board, newGame }) {
-  const [firstCard, setFirstCard] = useState(null);
-  const [secondCard, setSecondCard] = useState(null);
+function Board({ board, newGame, setMoves }) {
+  const [match, setMatch] = useState({ first: null, second: null });
   const [disabledCards, setDisabledCards] = useState([]);
+  const [turnOver, setTurnOver] = useState(false);
 
   useEffect(() => {
-    console.log("firstCard", firstCard);
-    console.log("secondCard", secondCard);
+    console.log("match", match);
 
-    if (firstCard && secondCard) {
-      if (firstCard === secondCard) {
+    if (match.first && match.second) {
+      setMoves((prev) => prev + 1);
+
+      if (match.first === match.second) {
         console.log("match");
-        setDisabledCards([...disabledCards, firstCard]);
-        setFirstCard(null);
-        setSecondCard(null);
+        setDisabledCards([...disabledCards, match.first]);
       } else {
         console.log("not match");
+        setTurnOver(true);
       }
+      setMatch({ first: null, second: null });
     }
-  }, [
-    newGame,
-    firstCard,
-    setFirstCard,
-    secondCard,
-    setSecondCard,
-    disabledCards,
-  ]);
+  }, [newGame, match, setMatch, disabledCards, setMoves]);
 
   return (
     <div className="container">
@@ -40,9 +34,10 @@ function Board({ board, newGame }) {
             disabledCards={disabledCards}
             key={index}
             element={element}
-            firstCard={firstCard}
-            setFirstCard={setFirstCard}
-            setSecondCard={setSecondCard}
+            match={match}
+            setMatch={setMatch}
+            turnOver={turnOver}
+            setTurnOver={setTurnOver}
           />
         ))}
       </div>
