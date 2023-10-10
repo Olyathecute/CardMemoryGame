@@ -10,7 +10,7 @@ const createBoard = ({ size, images }) => {
   const setSize = size === "small" ? 8 : 18;
   const fullBoard = imageTypes[images].slice(0, setSize);
   const boardSet = fullBoard.concat(fullBoard);
-  const shuffleBoardSet = boardSet.sort(() => Math.random() - 0.2);
+  const shuffleBoardSet = boardSet.sort(() => Math.random() - 0.5);
 
   return { boardSet: shuffleBoardSet, setSize, sizeName: size };
 };
@@ -46,10 +46,8 @@ function App() {
               newGame={newGame}
               moves={moves}
               setMoves={setMoves}
+              stopGame={stopGame}
             />
-            <button className="btn" onClick={stopGame}>
-              Close Game
-            </button>
           </>
         ) : (
           <StartPage
@@ -64,5 +62,3 @@ function App() {
 }
 
 export default App;
-
-// - дизейбл открытой карточки

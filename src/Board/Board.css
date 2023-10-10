@@ -20,14 +20,6 @@
   grid-template-columns: repeat(6, 1fr);
 }
 
-.parameters {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  margin: 10px 0;
-}
-
 .congratulation {
   margin: 10px;
   display: flex;
