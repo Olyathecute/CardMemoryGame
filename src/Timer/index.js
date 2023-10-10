@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./Timer.css";
 
 function Timer({ newGame }) {
   const [time, setTime] = useState(0);
@@ -20,16 +19,13 @@ function Timer({ newGame }) {
   }, [timerOn, time]);
 
   return (
-    <>
-      <div className="timer">
-        <span>Timer:&nbsp;</span>
-        <span className="interval">
-          {("0" + Math.trunc(time / 60)).slice(-2)}
-        </span>
-        <span className="column">:</span>
-        <span className="interval">{("0" + (time % 60)).slice(-2)}</span>
-      </div>
-    </>
+    <div>
+      <span>Timer:&nbsp;</span>
+      <span>
+        {("0" + Math.trunc(time / 60)).slice(-2)}:
+        {("0" + (time % 60)).slice(-2)}
+      </span>
+    </div>
   );
 }
 

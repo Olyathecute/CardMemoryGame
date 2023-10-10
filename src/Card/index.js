@@ -43,12 +43,9 @@ function Card({
             offsetParent: { id },
           },
         }) => {
-          console.log("match", match);
-
           match.first
             ? setMatch({ ...match, second: getCardName(id) })
             : setMatch({ ...match, first: getCardName(id) });
-          console.log("event", id);
 
           setShowBack((variable) => !variable);
         }}

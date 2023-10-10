@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import Card from "../Card";
+import Timer from "../Timer";
 import "./Board.css";
 
-// size: 8 or 18 pictures
-
-function Board({ board, newGame, setMoves }) {
+function Board({ board, newGame, moves, setMoves }) {
   const [match, setMatch] = useState({ first: null, second: null });
   const [disabledCards, setDisabledCards] = useState([]);
   const [turnOver, setTurnOver] = useState(false);
+
+  console.log("board", board);
 
   useEffect(() => {
     console.log("match", match);
@@ -28,8 +29,12 @@ function Board({ board, newGame, setMoves }) {
 
   return (
     <div className="container">
-      <div className="board">
-        {board.map((element, index) => (
+      <div className="parameters">
+        <Timer newGame={newGame} />
+        <div>Moves: {moves}</div>
+      </div>
+      <div className={`board ${board.size}`}>
+        {board.boardSet.map((element, index) => (
           <Card
             disabledCards={disabledCards}
             key={index}
