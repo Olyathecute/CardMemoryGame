@@ -1,0 +1,28 @@
+form {
+  width: 270px;
+}
+
+select {
+  border-radius: 5px;
+  border: 1px solid #cecece;
+  background-color: transparent;
+  text-decoration: none;
+  color: #fff;
+}
+
+input {
+  display: block;
+}
+
+.preferences {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 20px 0 0 0;
+}

@@ -1,4 +1,4 @@
-export const animals = [
+const animals = [
   { picture: "🐶", name: "dog" },
   { picture: "🐱", name: "cat" },
   { picture: "🐭", name: "mouse" },
@@ -19,7 +19,7 @@ export const animals = [
   { picture: "🐲", name: "dragon" },
 ];
 
-export const fruits = [
+const fruits = [
   { picture: "🍏", name: "greenApple" },
   { picture: "🍎", name: "redApple" },
   { picture: "🍐", name: "pear" },
@@ -40,7 +40,7 @@ export const fruits = [
   { picture: "🥑", name: "avocado" },
 ];
 
-export const flags = [
+const flags = [
   { picture: "🇨🇷", name: "Thailand" },
   { picture: "🇬🇪", name: "Georgia" },
   { picture: "🇩🇪", name: "Germany" },
@@ -59,4 +59,21 @@ export const flags = [
   { picture: "🇨🇮", name: "IvoryCoast" },
   { picture: "🇫🇷", name: "France" },
   { picture: "🇧🇦", name: "BosniaHerzegovina" },
+];
+
+export const imageTypes = {
+  animals: animals,
+  fruits: fruits,
+  flags: flags,
+};
+
+export const boardSizes = [
+  { name: "4x4", value: "small" },
+  { name: "6x6", value: "big" },
+];
+
+export const boardImage = [
+  { name: "Animals", value: "animals" },
+  { name: "Fruits", value: "fruits" },
+  { name: "Flags", value: "flags" },
 ];
