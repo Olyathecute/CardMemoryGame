@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 import "./Card.css";
 
-const createUniqId = (name) => name + "_" + Math.floor(Math.random() * 1000);
+const createUniqId = (id) => id + "_" + Math.floor(Math.random() * 1000);
 const getCardName = (id) => id.split("_")[0];
 
 function Card({
@@ -13,7 +13,7 @@ function Card({
   turnOver,
   setTurnOver,
 }) {
-  const { picture, name } = element;
+  const { picture, id } = element;
   const [showBack, setShowBack] = useState(false);
   const nodeRef = useRef(null);
 
@@ -28,16 +28,16 @@ function Card({
 
   return (
     <CSSTransition
-      in={disabledCards.includes(name) ? true : showBack}
+      in={disabledCards.includes(id) ? true : showBack}
       timeout={300}
       classNames="flip"
       nodeRef={nodeRef}
     >
       <div
-        id={createUniqId(name)}
+        id={createUniqId(id)}
         ref={nodeRef}
         className="card-container"
-        disabled={disabledCards.includes(name)}
+        disabled={disabledCards.includes(id)}
         onClick={({
           target: {
             offsetParent: { id },

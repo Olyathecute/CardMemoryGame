@@ -4,24 +4,22 @@ import StartPage from "./StartPage";
 import { imageTypes } from "./data";
 import "./App.css";
 
+const startSettings = { size: "small", images: "animals" };
+
 const createBoard = ({ size, images }) => {
-  const fullBoard = imageTypes[images].slice(0, size === "small" ? 8 : 18);
+  const setSize = size === "small" ? 8 : 18;
+  const fullBoard = imageTypes[images].slice(0, setSize);
   const boardSet = fullBoard.concat(fullBoard);
   const shuffleBoardSet = boardSet.sort(() => Math.random() - 0.2);
 
-  return { boardSet: shuffleBoardSet, size: size };
+  return { boardSet: shuffleBoardSet, setSize, sizeName: size };
 };
 
 function App() {
   const [newGame, setNewGame] = useState(false);
   const [board, setBoard] = useState(null);
   const [moves, setMoves] = useState(0);
-  const [preferences, setPreferences] = useState({
-    size: "small",
-    images: "animals",
-  });
-
-  console.log("preferences", preferences);
+  const [preferences, setPreferences] = useState({ ...startSettings });
 
   const startGame = () => {
     setNewGame(true);
@@ -31,6 +29,7 @@ function App() {
   const stopGame = () => {
     setNewGame(false);
     setMoves(0);
+    setPreferences({ ...startSettings });
   };
 
   return (
@@ -66,6 +65,4 @@ function App() {
 
 export default App;
 
-// - конец игры при открытии всех карточек
 // - дизейбл открытой карточки
-// - choose the board size (4х4 или 6х6)

@@ -4,23 +4,27 @@ import Timer from "../Timer";
 import "./Board.css";
 
 function Board({ board, newGame, moves, setMoves }) {
-  const [match, setMatch] = useState({ first: null, second: null });
+  const [match, setMatch] = useState({
+    first: null,
+    second: null,
+  });
   const [disabledCards, setDisabledCards] = useState([]);
   const [turnOver, setTurnOver] = useState(false);
+  const [stopTimer, setStopTimer] = useState(false);
 
-  console.log("board", board);
+  console.log("match", match);
 
   useEffect(() => {
-    console.log("match", match);
+    if (board.setSize === disabledCards.length) setStopTimer(true);
+  }, [disabledCards, board]);
 
+  useEffect(() => {
     if (match.first && match.second) {
       setMoves((prev) => prev + 1);
 
       if (match.first === match.second) {
-        console.log("match");
         setDisabledCards([...disabledCards, match.first]);
       } else {
-        console.log("not match");
         setTurnOver(true);
       }
       setMatch({ first: null, second: null });
@@ -30,10 +34,13 @@ function Board({ board, newGame, moves, setMoves }) {
   return (
     <div className="container">
       <div className="parameters">
-        <Timer newGame={newGame} />
+        <Timer newGame={newGame} stopTimer={stopTimer} />
         <div>Moves: {moves}</div>
       </div>
-      <div className={`board ${board.size}`}>
+      {board.setSize === disabledCards.length && (
+        <div className="congratulation">YOU WIN!</div>
+      )}
+      <div className={`board ${board.sizeName}`}>
         {board.boardSet.map((element, index) => (
           <Card
             disabledCards={disabledCards}

@@ -41,7 +41,10 @@ function StartPage({ preferences, setPreferences, startGame }) {
           <input
             type="submit"
             className="btn"
-            onClick={startGame}
+            onClick={(event) => {
+              event.preventDefault();
+              startGame();
+            }}
             value="Start New Game"
           />
         </div>

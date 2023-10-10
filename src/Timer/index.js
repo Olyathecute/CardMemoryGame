@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 
-function Timer({ newGame }) {
+function Timer({ newGame, stopTimer }) {
   const [time, setTime] = useState(0);
   const [timerOn, setTimerOn] = useState(false);
+
+  useEffect(() => {
+    stopTimer && setTimerOn(false);
+  }, [stopTimer]);
 
   useEffect(() => {
     setTimerOn(newGame);
