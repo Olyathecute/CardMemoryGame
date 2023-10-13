@@ -1,18 +1,22 @@
-import { useState } from "react";
-import Board from "./Board";
-import StartPage from "./StartPage";
-import { imageTypes } from "./data";
-import "./App.css";
+import { useState } from 'react';
+import Board from './Board';
+import StartPage from './StartPage';
+import { imageTypes } from './data';
+import './App.css';
 
-const startSettings = { size: "small", images: "animals" };
+const startSettings = { size: 'small', images: 'animals' };
 
 const createBoard = ({ size, images }) => {
-  const setSize = size === "small" ? 8 : 18;
+  const setSize = size === 'small' ? 8 : 18;
   const fullBoard = imageTypes[images].slice(0, setSize);
   const boardSet = fullBoard.concat(fullBoard);
   const shuffleBoardSet = boardSet.sort(() => Math.random() - 0.5);
 
-  return { boardSet: shuffleBoardSet, setSize, sizeName: size };
+  return {
+    boardSet: shuffleBoardSet,
+    boardSize: setSize * 2,
+    boardSizeName: size,
+  };
 };
 
 function App() {
