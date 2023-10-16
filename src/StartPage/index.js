@@ -1,56 +1,47 @@
-import "./StartPage.css";
-import { boardImage, boardSizes } from "../data";
+import { useState } from 'react'
+import Chooser from './Chooser'
+import { boardImage, boardSizes } from '../data'
+import './StartPage.css'
 
-function StartPage({ preferences, setPreferences, startGame }) {
+const startSettings = { size: 'small', images: 'animals' }
+
+const selectPreferences = [
+  {
+    title: 'Choose board size',
+    items: boardSizes,
+    preferenceName: 'size',
+  },
+  {
+    title: 'Choose board image',
+    items: boardImage,
+    preferenceName: 'images',
+  },
+]
+
+function StartPage({ startGame }) {
+  const [preferences, setPreferences] = useState({ ...startSettings })
+
   return (
-    <div className="preferences">
+    <div className='preferences'>
       <form>
-        <div className="block">
-          <p>Choose board size</p>
-          <select
-            required
-            onChange={(event) =>
-              setPreferences({ ...preferences, size: event.target.value })
-            }
-          >
-            {boardSizes.map(({ name, value }, id) => (
-              <option key={id} value={value}>
-                {name}
-              </option>
-            ))}
-          </select>
-        </div>
+        {selectPreferences.map(({ title, items, preferenceName }, index) => (
+          <Chooser key={index} title={title} chooseValue={(value) => setPreferences({ ...preferences, [preferenceName]: value })} items={items} />
+        ))}
 
-        <div className="block">
-          <p>Choose board image</p>
-          <select
-            required
-            onChange={(event) =>
-              setPreferences({ ...preferences, images: event.target.value })
-            }
-          >
-            {boardImage.map(({ name, value }, id) => (
-              <option key={id} value={value}>
-                {name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="block">
+        <div className='block'>
           <input
-            type="submit"
-            className="btn"
+            type='submit'
+            className='btn'
             onClick={(event) => {
-              event.preventDefault();
-              startGame();
+              event.preventDefault()
+              startGame(preferences)
             }}
-            value="Start New Game"
+            value='Start New Game'
           />
         </div>
       </form>
     </div>
-  );
+  )
 }
 
-export default StartPage;
+export default StartPage

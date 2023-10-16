@@ -1,13 +1,13 @@
-import Timer from '../Timer';
-import './GameInfo.css';
+import Timer from '../Timer'
+import './GameInfo.css'
 
-function GameInfo({ newGame, stopTimer, moves }) {
+function GameInfo({ gameFinished, moves }) {
   return (
-    <div className="info">
-      <Timer newGame={newGame} stopTimer={stopTimer} />
+    <div className='info'>
+      <Timer gameFinished={gameFinished} />
       <div>Moves: {moves}</div>
     </div>
-  );
+  )
 }
 
-export default GameInfo;
+export default GameInfo

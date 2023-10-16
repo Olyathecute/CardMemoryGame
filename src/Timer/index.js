@@ -1,36 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-function Timer({ newGame, stopTimer }) {
-  const [time, setTime] = useState(0);
-  const [timerOn, setTimerOn] = useState(false);
-
-  useEffect(() => {
-    stopTimer && setTimerOn(false);
-  }, [stopTimer]);
+function Timer({ gameFinished }) {
+  const [time, setTime] = useState(0)
+  const [timerIntervalId, setTimerIntervalId] = useState(null)
 
   useEffect(() => {
-    setTimerOn(newGame);
-  }, [newGame]);
+    const intervalId = setInterval(() => setTime((time) => time + 1), 1000)
+    setTimerIntervalId(intervalId)
+  }, [])
 
   useEffect(() => {
-    let intervalId = null;
-
-    if (timerOn) {
-      intervalId = setInterval(() => setTime((time) => time + 1), 1000);
+    if (gameFinished) {
+      clearInterval(timerIntervalId)
+      setTimerIntervalId(null)
     }
-
-    return () => clearInterval(intervalId);
-  }, [timerOn, time]);
+  }, [gameFinished, timerIntervalId])
 
   return (
     <div>
       <span>Timer:&nbsp;</span>
       <span>
-        {("0" + Math.trunc(time / 60)).slice(-2)}:
-        {("0" + (time % 60)).slice(-2)}
+        {String(Math.trunc(time / 60)).padStart(2, '0')}:{String(time % 60).padStart(2, '0')}
       </span>
     </div>
-  );
+  )
 }
 
-export default Timer;
+export default Timer
